@@ -1,249 +1,178 @@
-# FastAPI Project
+# Python FastAPI Starter API Project 🚀
 
-A scalable FastAPI project template with SQLAlchemy, PostgreSQL, and best practices for building robust APIs.
+Welcome to the **Python FastAPI Starter API Project**! This repository provides a scalable FastAPI project template designed for building production-ready APIs. With a focus on best practices, it incorporates async SQLAlchemy, PostgreSQL, and a repository pattern implementation. 
+
+[![Releases](https://img.shields.io/github/release/YuenEye/python-fastapi-starter-api-project.svg)](https://github.com/YuenEye/python-fastapi-starter-api-project/releases)
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Directory Structure](#directory-structure)
+- [API Endpoints](#api-endpoints)
+- [Authentication](#authentication)
+- [Error Handling](#error-handling)
+- [Database Migrations](#database-migrations)
+- [Testing](#testing)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
-- **FastAPI framework** with all its features
-- **Async SQLAlchemy** with PostgreSQL
-- **Repository pattern** for data access
-- **Service layer** for business logic
-- **Pydantic models** for validation
-- **Modular project structure** following best practices
-- **Dependency injection** for clean code organization
-- **Custom exception handling** for consistent error responses
-- **Docker support** for easy development and deployment
-- **Automatic API documentation** with Swagger/OpenAPI
-- **Comprehensive test suite** with pytest
-- **Authentication** with JWT tokens
+- **JWT Authentication**: Secure your API with JSON Web Tokens.
+- **Comprehensive Error Handling**: Manage errors gracefully and provide clear feedback.
+- **Modular Architecture**: Organize your code into modules for better maintainability.
+- **Dependency Injection**: Simplify your code and enhance testability.
+- **Pydantic Validation**: Ensure data integrity with automatic data validation.
+- **Alembic Migrations**: Handle database schema changes easily.
 
-## Project Structure
+## Technologies Used
+
+This project utilizes the following technologies:
+
+- **FastAPI**: A modern web framework for building APIs with Python 3.7+.
+- **SQLAlchemy**: An ORM for Python that provides a full suite of well-known enterprise-level persistence patterns.
+- **PostgreSQL**: A powerful, open-source object-relational database system.
+- **Pydantic**: Data validation and settings management using Python type annotations.
+- **Alembic**: A lightweight database migration tool for use with SQLAlchemy.
+
+## Installation
+
+To get started with this project, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/YuenEye/python-fastapi-starter-api-project.git
+   cd python-fastapi-starter-api-project
+   ```
+
+2. **Create a virtual environment**:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   ```
+
+3. **Install the dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Set up the environment variables**: Create a `.env` file in the root directory and add your PostgreSQL database URL and JWT secret key. For example:
+   ```env
+   DATABASE_URL=postgresql://user:password@localhost/dbname
+   JWT_SECRET_KEY=your_jwt_secret_key
+   ```
+
+5. **Run the database migrations**:
+   ```bash
+   alembic upgrade head
+   ```
+
+6. **Start the application**:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+Now, your FastAPI application should be running at `http://127.0.0.1:8000`.
+
+## Usage
+
+Once the application is running, you can access the interactive API documentation at `http://127.0.0.1:8000/docs`. Here, you can test the endpoints and see the responses.
+
+## Directory Structure
+
+The project follows a modular structure for better organization:
 
 ```
-.
-├── alembic/                # Database migrations
-├── app/                    # Application code
-│   ├── api/                # API routes
-│   │   └── v1/             # API version 1
-│   │       ├── endpoints/  # API endpoints
-│   │       └── api.py      # API router
-│   ├── core/               # Core configuration
-│   ├── db/                 # Database models and session
-│   ├── dependencies/       # Dependency injection
-│   ├── exceptions/         # Custom exceptions
-│   ├── middlewares/        # Middleware functions
-│   ├── models/             # SQLAlchemy models
-│   ├── repositories/       # Data access layer
-│   ├── schemas/            # Pydantic schemas
-│   ├── services/           # Business logic
-│   ├── utils/              # Utility functions
-│   └── main.py             # FastAPI application
-├── docs/                   # Documentation
-├── tests/                  # Tests
-│   ├── integration/        # Integration tests
-│   └── unit/               # Unit tests
-├── .env.example            # Example environment variables
-├── .gitignore              # Git ignore file
-├── docker-compose.yml      # Docker Compose configuration
-├── Dockerfile              # Docker configuration
-├── main.py                 # Application entry point
-├── pytest.ini              # Pytest configuration
-├── README.md               # Project documentation
-├── requirements.txt        # Python dependencies
-└── setup.py                # Package setup
+python-fastapi-starter-api-project/
+├── app/
+│   ├── api/
+│   │   ├── v1/
+│   │   │   ├── endpoints/
+│   │   │   └── api.py
+│   │   └── dependencies.py
+│   ├── core/
+│   │   ├── config.py
+│   │   └── security.py
+│   ├── db/
+│   │   ├── base.py
+│   │   ├── models.py
+│   │   └── session.py
+│   ├── main.py
+│   ├── schemas/
+│   └── services/
+├── alembic/
+├── tests/
+└── requirements.txt
 ```
 
-## Getting Started
+## API Endpoints
 
-### Prerequisites
+The API includes various endpoints. Here are some examples:
 
-- Python 3.9+
-- PostgreSQL
-- Docker (optional)
+### User Endpoints
 
-### Installation
+- **Create User**: `POST /api/v1/users/`
+- **Get User**: `GET /api/v1/users/{user_id}`
+- **Update User**: `PUT /api/v1/users/{user_id}`
+- **Delete User**: `DELETE /api/v1/users/{user_id}`
 
-#### Local Development
+### Authentication Endpoints
 
-1. Clone the repository:
+- **Login**: `POST /api/v1/auth/login`
+- **Logout**: `POST /api/v1/auth/logout`
 
+## Authentication
+
+This project uses JWT for authentication. Upon successful login, the server returns a JWT token. You must include this token in the `Authorization` header for protected routes.
+
+Example of the `Authorization` header:
+```
+Authorization: Bearer <your_token>
+```
+
+## Error Handling
+
+The application includes comprehensive error handling. Common HTTP errors are caught and returned in a consistent format. For example:
+
+- **404 Not Found**: When a resource does not exist.
+- **401 Unauthorized**: When authentication fails.
+- **422 Unprocessable Entity**: When validation fails.
+
+## Database Migrations
+
+Alembic handles database migrations. To create a new migration, run:
 ```bash
-git clone https://github.com/kumarsonu676/python-fastapi-starter-api-project
-cd python-fastapi-starter-api-project
+alembic revision --autogenerate -m "your_message"
 ```
-
-2. Create and activate a virtual environment:
-
+To apply the migration, use:
 ```bash
-py -m venv venv
-venv\Scripts\activate #venv\scripts\activate for windows
+alembic upgrade head
 ```
 
-3. Install dependencies:
+## Testing
 
+Testing is essential for maintaining code quality. This project includes a `tests` directory with unit tests for various components. To run the tests, execute:
 ```bash
-pip install -r requirements.txt
+pytest tests/
 ```
 
-OR
+## Contributing
 
-```bash
-py -m pip install -r requirements.txt
-```
+Contributions are welcome! If you have suggestions for improvements or find bugs, please open an issue or submit a pull request.
 
-```bash
-#to update requirements.txt file =>
-py -m pip freeze > requirements.txt
-```
-
-4. Create a `.env` file based on `.env.example`:
-
-```bash
-cp .env.example .env
-```
-
-5. Start the application:
-
-```bash
-python main.py
-```
-
-OR
-
-```bash
-py -m main
-```
-
-#### Docker Development
-
-1. Clone the repository:
-
-```bash
-git clone https://github.com/kumarsonu676/python-fastapi-starter-api-project
-cd python-fastapi-starter-api-project
-```
-
-2. Create a `.env` file based on `.env.example`:
-
-```bash
-cp .env.example .env
-```
-
-3. Start the containers:
-
-```bash
-docker-compose up -d
-```
-
-### Access the API
-
-The API will be available at [http://localhost:8000](http://localhost:8000).
-
-API documentation is available at:
-
-- Swagger UI: [http://localhost:8000/api/v1/docs](http://localhost:8000/api/v1/docs)
-- ReDoc: [http://localhost:8000/api/v1/redoc](http://localhost:8000/api/v1/redoc)
-
-## Development
-
-### Adding a New Endpoint
-
-1. Create a new file in `app/api/v1/endpoints/`
-2. Create Pydantic models in `app/schemas/`
-3. Add SQLAlchemy models in `app/models/` if needed
-4. Implement business logic in `app/services/`
-5. Create repository in `app/repositories/` for data access
-6. Add the router to `app/api/v1/api.py`
-
-### Database Migrations
-
-```bash
-# Initialize migrations (first time only)
-py -m alembic init alembic
-
-# Create a new migration
-py -m alembic revision --autogenerate -m "Migration message"
-
-# Run migrations
-py -m alembic upgrade head
-```
-
-# Generate SQL Script from migration/revision name
-
-```bash
-#  For the first migration— When it has no parent (Revises: is empty).
-py -m alembic upgrade base:<revision_name> --sql > migration_script.sql
-```
-
-```bash
-# If you want to generate a script that can be used to downgrade from the current revision to the base revision, you can use:
-py -m alembic downgrade base --sql > migration_script.sql
-```
-
-```bash
-# For the subsequent migration— When it has a parent (Revises: <revision_name>).
-# This will generate a script that can be used to upgrade from the previous revision to the current one.
-py -m alembic upgrade <from_rev>:<to_rev> --sql > migration_script.sql
-```
-
-```bash
-# If you want the SQL to downgrade from to_rev back to from_rev, just reverse the order:
-py -m alembic downgrade <to_rev>:<from_rev> --sql > migration_script.sql
-```
-
-```bash
-# To list all revisions and order:
-py -m alembic history --verbose
-```
-
-```bash
-# To show the current revision:
-py -m alembic current
-```
-
-```bash
-# To inspect details of a specific revision:
-py -m alembic show <revision_name>
-```
-
----
-
-### Environment Variables
-
-Key environment variables for configuration:
-
-- `API_V1_STR`: API version prefix
-- `SECRET_KEY`: Secret key for JWT tokens
-- `POSTGRES_SERVER`: PostgreSQL server address
-- `POSTGRES_USER`: PostgreSQL username
-- `POSTGRES_PASSWORD`: PostgreSQL password
-- `POSTGRES_DB`: PostgreSQL database name
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Acknowledgements
+For the latest releases, visit [Releases](https://github.com/YuenEye/python-fastapi-starter-api-project/releases). 
 
-- [FastAPI](https://fastapi.tiangolo.com/)
-- [SQLAlchemy](https://www.sqlalchemy.org/)
-- [Pydantic](https://pydantic-docs.helpmanual.io/)
-- [Alembic](https://alembic.sqlalchemy.org/)
-
-2. Activate the virtual environment:
-
-   ```bash
-   # On Windows
-   venv\Scripts\activate
-
-   # On Linux/Mac
-   source venv/bin/activate
-   ```
-
-3. Run the application:
-
-   ```bash
-   python main.py
-   ```
-
-4. Access the API at http://localhost:8000
+You can download and execute the latest version from the releases section.
